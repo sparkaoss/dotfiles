@@ -1,4 +1,4 @@
-vim.g.base46_cache = vim.fn.stdpath "data" .. "/nvchad/base46/"
+vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
 vim.g.mapleader = " "
 
 -- bootstrap lazy and all plugins
@@ -36,14 +36,42 @@ vim.schedule(function()
   require "mappings"
 end)
 
-require("base46").toggle_transparency()
+require('rainbow-delimiters.setup').setup {
+    strategy = {
+        -- ...
+    },
+    query = {
+        -- ...
+    },
+    highlight = {
+        -- ...
+        'RainbowDelimiterBlue',    -- Nivel 1
+        'RainbowDelimiterGreen',   -- Nivel 2
+        'RainbowDelimiterYellow',  -- Nivel 3
+        'RainbowDelimiterOrange',  -- Nivel 4
+        'RainbowDelimiterRed',     -- Nivel 5
+        'RainbowDelimiterViolet',  -- Nivel 6
+        'RainbowDelimiterCyan',    -- Nivel 7
+    },
+}
 
-vim.api.nvim_create_augroup("exe_code", { clear = true })
+--limpiando bordes
+-- Crear un grupo de autocomandos llamado 'python_executor'
+vim.api.nvim_create_augroup("python_executor", { clear = true })
 
-vim.api.nvim_create_autocmd("FileType", {
+-- Autocomando para archivos Python
+vim.api.nvim_create_autocmd("filetype", {
     pattern = "python",
-    group = "exe_code",
+    group = "python_executor",
     callback = function()
-        vim.api.nvim_buf_set_keymap(0, 'n', '<A-º>', ':sp<CR>:term python %<CR>:startinsert<CR>', { noremap = true, silent = true })
+        -- Mapeo de tecla para ejecutar Python en una terminal en la parte inferior
+        vim.api.nvim_buf_set_keymap(0, 'n', '<leader>r', ':belowright 15split<CR>:term python %<CR>:startinsert<CR>', { noremap = true, silent = true })
     end
 })
+
+-- Configuración opcional para estética (eliminar bordes)
+vim.opt.fillchars = { horiz = " ", vert = " " }
+vim.cmd [[
+    highlight WinSeparator guibg=None guifg=None
+]]
+

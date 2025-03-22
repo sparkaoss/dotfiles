@@ -12,14 +12,17 @@ return {
       require "configs.lspconfig"
     end,
   },
+  {
+    "HiPhish/rainbow-delimiters.nvim"
+  },
 
-  -- {
-  -- 	"nvim-treesitter/nvim-treesitter",
-  -- 	opts = {
-  -- 		ensure_installed = {
-  -- 			"vim", "lua", "vimdoc",
-  --      "html", "css"
-  -- 		},
-  -- 	},
-  -- },
+  {
+  	"nvim-treesitter/nvim-treesitter",
+  	opts = {
+  		ensure_installed = {
+  			"vim", "lua", "vimdoc",
+       "html", "css", "python"
+  		},
+  	},
+  },
 }
