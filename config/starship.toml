@@ -1,189 +1,130 @@
 add_newline = false
 palette = 'onedark'
 
-format = """
-$directory\
-$git_branch\
-$git_status\
-$git_metrics\
-$python\
-$lua\
-$nodejs\
-$golang\
-$haskell\
-$rust\
-$ruby\
-$package\
-$aws\
-$docker_context\
-$jobs\
-$cmd_duration\
-$line_break\
-$character"""
+format = """\
+$directory$git_branch$git_status$git_metric$spython$nodejs$java$php$rust$golang$package$cmd_duration$character"""
 
 [character]
 success_symbol = '[❯](bold green)'
 error_symbol = '[❯](bold red)'
 
-[os]
-format = '[$symbol](blue) '
-disabled = false
-
-
-
-[line_break]
-disabled = true
-
 [directory]
-style = 'fg:dark_blue'
-format = '[$path ]($style)'
-home_symbol = '󰋜 ~'
-read_only_style = '197'
-read_only = ' '
-truncation_length = 2
-
+style = 'fg:blue'
+format = '[ $path]($style)'
+truncation_length = 1
+# truncation_symbol = '…/'
+home_symbol = ' ~'
+read_only = '🔒 '
+read_only_style = 'red'
 
 [directory.substitutions]
-'Documents' = '󰈙'
-'Downloads' = ' '
-'Music' = ' '
-'Pictures' = ' '
+'Documentos' = ' '
+'Descargas'  = ' '
+'Música'     = ' '
+'Imágenes'   = ' '
+'Vídeos'     = ' '
+'Escritorio' = ' '
+'Plantillas' = ' '
+'Público'    = ' '
 
 [git_branch]
-style = 'fg:green'
 symbol = ' '
-format = '[on](white) [$symbol$branch ]($style)'
+style = 'fg:#98c379'
+format = '[ $symbol$branch ]($style)'
 
 [git_status]
-style = 'fg:green'
-format = '([$all_status$ahead_behind]($style) )'
+style = 'fg:#e5c07b'
+format = '([$staged$modified $untracked$deleted$ahead_behind]($style))'
+staged     = '[ $count](fg:#98c379)'
+modified   = '[ $count](fg:#61afef)'
+untracked  = '[ $count](fg:#c678dd)'
+deleted    = '[ $count](fg:#d19a66)'
+ahead      = '[⇡$count](fg:#a3be8c)'
+behind     = '[⇣$count](fg:#bf616a)'
+diverged   = '[⇕$count](fg:#e5c07b)'
 
 [git_metrics]
 disabled = false
-format = '(([ $added ]($added_style))([ $deleted ]($deleted_style)))'
 only_nonzero_diffs = true
-added_style = 'green'
-deleted_style = 'red'
-
-[os.symbols]
-Alpaquita = " "
-Alpine = " "
-AlmaLinux = " "
-Amazon = " "
-Android = " "
-Arch = " "
-Artix = " "
-CentOS = " "
-Debian = " "
-DragonFly = " "
-Emscripten = " "
-EndeavourOS = " "
-Fedora = " "
-FreeBSD = " "
-Garuda = "󰛓 "
-Gentoo = " "
-HardenedBSD = "󰞌 "
-Illumos = "󰈸 "
-Kali = " "
-Linux = " "
-Mabox = " "
-Macos = " "
-Manjaro = " "
-Mariner = " "
-MidnightBSD = " "
-Mint = " "
-NetBSD = " "
-NixOS = " "
-OpenBSD = "󰈺 "
-openSUSE = " "
-OracleLinux = "󰌷 "
-Pop = " "
-Raspbian = " "
-Redhat = " "
-RedHatEnterprise = " "
-RockyLinux = " "
-Redox = "󰀘 "
-Solus = "󰠳 "
-SUSE = " "
-Ubuntu = " "
-Unknown = " "
-Void = " "
-Windows = " "
+format = '[  $added ]($added_style)[  $deleted ]($deleted_style)'
+added_style = 'fg:#A3BE8C'
+deleted_style = 'fg:#BF616A'
 
 [python]
 symbol = ' '
-
-[lua]
-symbol = ' '
+style = 'fg:#f0e68c'
+format = '[ $symbol$version ]($style)'
 
 [nodejs]
-style = 'blue'
 symbol = ' '
+style = 'fg:#8cc84b'
+format = '[ $symbol$version ]($style)'
 
-[golang]
-style = 'blue'
-symbol = ' '
+[java]
+symbol = ' '
+style = 'fg:#b07219'
+format = '[ $symbol$version ]($style)'
 
-[haskell]
-style = 'blue'
-symbol = ' '
+[php]
+symbol = ' '
+style = 'fg:#8892be'
+format = '[ $symbol$version ]($style)'
 
 [rust]
-style = 'orange'
 symbol = ' '
+style = 'fg:#dea584'
+format = '[ $symbol$version ]($style)'
 
-[ruby]
-style = 'blue'
-symbol = ' '
+[golang]
+symbol = ' '
+style = 'fg:#00acd7'
+format = '[ $symbol$version ]($style)'
 
 [package]
 symbol = '󰏗 '
-
-[aws]
-symbol = ' '
-style = 'yellow'
-format = '[$symbol($profile )(\[$duration\] )]($style)'
-
-[docker_context]
-symbol = ' '
-style = 'fg:#06969A'
-format = '[$symbol]($style) $path'
-detect_files = ['docker-compose.yml', 'docker-compose.yaml', 'Dockerfile']
-detect_extensions = ['Dockerfile']
-
-[jobs]
-symbol = ' '
-style = 'red'
-number_threshold = 1
-format = '[$symbol]($style)'
+format = '[ $symbol$version ](white)'
 
 [cmd_duration]
 min_time = 500
-style = 'fg:gray'
-format = '[$duration]($style)'
-
-[palettes.nord]
-dark_blue = '#5E81AC'
-blue = '#81A1C1'
-teal = '#88C0D0'
-red = '#BF616A'
-orange = '#D08770'
-green = '#A3BE8C'
-yellow = '#EBCB8B'
-purple = '#B48EAD'
-gray = '#434C5E'
-black = '#2E3440'
-white='#D8DEE9'
+style = 'gray'
+format = '[ ⏱ $duration ]($style)'
 
 [palettes.onedark]
-dark_blue='#61afef'
-blue='#56b6c2'
-red='#e06c75'
-green='#98c379'
-purple='#c678dd'
-cyan='#56b6c2'
-orange='#be5046'
-yellow='#e5c07b'
-gray='#828997'
-white ='#abb2bf'
-black='#2c323c'
+blue = '#61afef'
+green = '#98c379'
+yellow = '#e5c07b'
+red = '#e06c75'
+purple = '#c678dd'
+gray = '#828997'
+white = '#abb2bf'
+black = '#2c323c'
+
+[palettes.nord]
+blue = '#81A1C1'
+green = '#A3BE8C'
+yellow = '#EBCB8B'
+red = '#BF616A'
+purple = '#B48EAD'
+gray = '#4C566A'
+white = '#D8DEE9'
+black = '#2E3440'
+
+[palettes.github_dark]
+blue = '#4078c0'
+green = '#28a745'
+yellow = '#dbab09'
+red = '#d73a49'
+purple = '#6f42c1'
+gray = '#6a737d'
+white = '#e1e4e8'
+black = '#24292e'
+
+[palettes.tokyonight]
+blue = '#7aa2f7'
+green = '#9ece6a'
+yellow = '#e0af68'
+red = '#f7768e'
+purple = '#bb9af7'
+gray = '#565f89'
+white = '#c0caf5'
+black = '#1a1b26'
