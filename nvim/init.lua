@@ -1,13 +1,12 @@
 -- bootstrap lazy.nvim, LazyVim and your plugins
 require("config.lazy")
 
--- Execute in lower terminal--
+-- -- -- Execute in lower terminal--
 vim.keymap.set("n", "<leader>rr", "<cmd>RunCode<CR>", {
   noremap = true,
   silent = true,
   desc = "Execute in lower terminal",
 })
-
 -- Execute in floating terminal --
 vim.keymap.set("n", "<leader>rf", function()
   local file = vim.fn.expand("%:p")
@@ -23,7 +22,7 @@ vim.keymap.set("n", "<leader>rf", function()
   local cmd = cmds[ft]
   if cmd then
     local Terminal = require("toggleterm.terminal").Terminal
-    local shell = vim.fn.has("win32") == 1 and "cmd /K" or "zsh"
+    -- local shell = vim.fn.has("win32") == 1 and "cmd /K" or "zsh"
     -- local shell = os.getenv("SHELL") or "bash"
 
     local term = Terminal:new({
@@ -38,7 +37,7 @@ vim.keymap.set("n", "<leader>rf", function()
 
     term:toggle()
     vim.defer_fn(function()
-      term:send(cmd .. "\n")
+      term:send(cmd)
     end, 200)
   else
     print("Unsupported language for execution in floating terminal: " .. ft)
